@@ -1,19 +1,44 @@
-# app
 
-## Project setup
-```
-npm install
-```
+### 简介
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+* 前台页面 基于 vue3.0 和 ts 搭建的项目
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 基本设计思路
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. 登录
+
+* 输入用户名和密码进行登录
+  * 默认都是admin
+* 登录后进入管理员页面
+
+2. 管理员页面
+
+* 头部是标题和头像
+  * 可以退出登录，退出后回到登录页面
+* 首页
+  * 显示对哪些部门进行管理
+    * 技术部
+    * 销售部
+    * 人力资源部
+    * ...
+* 员工信息管理
+  * 员工信息
+    * 姓名
+    * 电话
+    * 性别
+    * 职位
+  * 可以对员工信息增删改查
+* 员工工资管理
+  * 姓名
+  * 工资
+  * 可以增加或减少
+* 报表统计
+  * 各个部门的平均工资
+    * 饼状图
+    * 折线图
+* 修改密码
+  * 修改管理员密码
+
+### 个人博客
+
+* https://h2sheep.gitee.io/
