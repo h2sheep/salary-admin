@@ -2,10 +2,11 @@
   <router-view/>
 </template>
 
-<script>
+<script lang="ts">
 
   import '@/assets/css/base.less'
+  import { defineComponent } from 'vue'
 
-  export default {}
+  export default defineComponent({})
 
 </script>

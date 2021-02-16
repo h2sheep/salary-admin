@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 
-// 用户登录
-router.post('/login', (req, res, next) => {
-  res.send('login')
-});
+const { login, isAuth } = require('../controls/user')
 
-module.exports = router;
+// 用户登录
+router.post('/login', login)
+
+module.exports = router

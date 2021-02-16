@@ -3,7 +3,7 @@
     <!-- 用户名 -->
     <a-form-item>
       <a-input
-        v-model:value="formState.user"
+        v-model:value="formState.username"
         size="large"
         placeholder="请输入用户名"
       >
@@ -54,7 +54,7 @@
     emits: ["login"],
     setup(props, { emit }) {
       const formState: IUserForm = reactive({
-        user: "",
+        username: "",
         password: "",
       })
 

@@ -1,15 +1,30 @@
 import request from './axios'
 
-import { AxiosResponse } from 'axios'
 
+// 登录
+interface IUser {
+  uid: string
+}
+
+interface IUserLogin {
+  code: number
+  data: IUser
+  message: string
+}
+
+export function userLogin<T>(user: T) {
+  return request.post<T, IUserLogin>('/users/login', user)
+}
+
+
+// 获取用户信息
 export function getUserInfo<T>() {
 
-  // return request.get<T, AxiosResponse<T>>('')
+  // return request.get<T, AxiosResponse<T>>()
 
   return Promise.resolve({
-    code: 0,
     data: {
-      avatar: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2979475887,2210716721&fm=26&gp=0.jpg',
+      avatar: '',
       level: 0
     }
   })

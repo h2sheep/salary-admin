@@ -62,7 +62,9 @@
 
       // 退出登录
       const logout = ():void => {
-        console.log('退出登录')
+        // 清除token
+        localStorage.removeItem('token')
+        router.replace('/login')
       }
 
       // 切换内容

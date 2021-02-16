@@ -13,7 +13,15 @@ import {
   Menu,
 } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';
+import { MessageApi } from 'ant-design-vue/lib/message';
 
+
+// // 对vue进行类型补充说明
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $message: MessageApi // 这里可以用$Api具体的类型代替any
+  }
+}
 
 export function importAntd(app: App<Element>) {
   app
@@ -26,5 +34,5 @@ export function importAntd(app: App<Element>) {
   .use(Dropdown)
   .use(Menu)
 
-  app.config.globalProperties.$message = message;
+  app.config.globalProperties.$message = message
 }

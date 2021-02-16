@@ -1,8 +1,8 @@
 
 
 export interface IUserForm {
-  user: string;
-  password: string;
+  username: string
+  password: string
 }
 
 export interface IPasswordForm {
