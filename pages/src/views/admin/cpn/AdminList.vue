@@ -61,6 +61,7 @@
   } from '@ant-design/icons-vue';
 
   import { defineComponent, ref } from 'vue'
+  import { useRouter } from 'vue-router';
 
   export default defineComponent({
     components: {
@@ -70,13 +71,37 @@
       AccountBookOutlined,
       SettingOutlined
     },
-    emits: ['changeCategory'],
-    setup(props, { emit }) {
+    setup() {
+
+      const router = useRouter()
+
       const category = ref(0)
 
       const changeCategory = (selfCategory: number) => {
         category.value = selfCategory
-        emit('changeCategory', selfCategory)
+        _changeCategory(selfCategory)
+      }
+
+      function _changeCategory(category: number): void {
+        switch (category) {
+          case 0:
+            router.push('/admin/chart')
+            break
+          case 1:
+            router.push('/admin/section')
+            break
+          case 2:
+            router.push('/admin/staff')
+            break
+          case 3:
+            router.push('/admin/salary')
+            break
+          case 4:
+            router.push('/admin/update')
+            break
+          default:
+            break
+        }
       }
 
       return {

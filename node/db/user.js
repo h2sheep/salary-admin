@@ -10,6 +10,7 @@ const UserSchema = mongoose.Schema({
   username: String,
   password: String,
   level: Number,
+  avatar: String
 })
 
 // 用户集合

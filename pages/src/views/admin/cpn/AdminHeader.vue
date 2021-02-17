@@ -7,11 +7,10 @@
   >
     <a-col :span="6" :offset="1"><h2>工资管理系统</h2></a-col>
     <a-col :span="3">
-      <a-avatar :src="userInfo.avatar" size="large" class="avatar"/>
-
+      <a-avatar :src="info.avatar" size="large" class="avatar"/>
       <a-dropdown>
         <a class="ant-dropdown-link" @click.prevent>
-          <span class="level">{{ userInfo.level === 0 ? '管理员' : '超级管理员' }}</span>
+          <span class="level">{{ info.level === ADMIN  ? '管理员' : '超级管理员' }}</span>
         </a>
 
         <template #overlay>
@@ -28,22 +27,28 @@
 
 <script lang="ts">
 
-  import { IUserInfo } from '@/typings/user'
-  import { defineComponent, PropType } from 'vue'
+  import { IUseAdmin, useAdmin } from '@/hooks/user'
+  import { USER_LEVEL } from '@/typings/user'
+  import { defineComponent } from 'vue'
 
 
   export default defineComponent({
-    props: {
-      userInfo: Object as PropType<IUserInfo>
-    },
-    emits: ['logout'],
-    setup(props, { emit }) {
-      const logout = (): void => {
-        emit('logout')
+    async setup() {
+
+      const level = {
+        ADMIN: USER_LEVEL.ADMIN,
+        SUPER_ADMIN: USER_LEVEL.SUPER_ADMIN
       }
 
+      const { getAdminInfo, logout }: IUseAdmin = useAdmin()
+
+      // 获取管理员信息
+      const info = await getAdminInfo()
+
       return {
-        logout
+        ...level,
+        info,
+        logout,
       }
     }
   })

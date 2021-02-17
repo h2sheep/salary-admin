@@ -52,12 +52,16 @@
     },
     emits: ["update"],
     setup(props, { emit }) {
+
+
+
       const formState: IPasswordForm = reactive({
         oldPassword: "",
         newPassword: "",
       })
 
       const handleFinish = (): void => {
+        if (formState.oldPassword !== formState.newPassword) console.log('两次密码不一样');
         emit("update", formState)
       }
 

@@ -28,14 +28,17 @@
     </a-form-item>
 
     <!-- 登录按钮 -->
-    <a-form-item
-      ><a-button
-        type="primary"
-        html-type="submit"
+    <a-form-item>
+      <a-button
+        type="primary" html-type="submit" block
         :disabled="formState.user === '' || formState.password === ''"
-        >登录</a-button
-      ></a-form-item
-    >
+      >
+        登录
+      </a-button>
+    </a-form-item>
+
+    <!-- 获取管理员账号 -->
+    <a-button type="link" size="small" @click="getAdminAccount">获取账号</a-button>
   </a-form>
 </template>
 
@@ -44,6 +47,7 @@
   import { UserOutlined, LockOutlined } from "@ant-design/icons-vue"
   import { defineComponent, reactive } from "vue"
 
+  import { IUseAdmin, useAdmin } from '@/hooks/user'
   import { IUserForm } from "@/typings/user"
 
   export default defineComponent({
@@ -58,6 +62,16 @@
         password: "",
       })
 
+      const { getAdmin }: IUseAdmin = useAdmin()
+
+      // 获取管理员账号
+      const getAdminAccount = async () => {
+        const result = await getAdmin()
+        formState.username = result.data.username
+        formState.password = result.data.password
+      }
+
+      // 提交登录事件
       const handleFinish = (): void => {
         emit("login", formState)
       }
@@ -65,6 +79,7 @@
       return {
         formState,
         handleFinish,
+        getAdminAccount
       }
     },
   })
