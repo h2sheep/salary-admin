@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 const { get } = require("mongoose")
-const pk = 'h2sheep'
+const PK = 'h2sheep'
 
 // 接口返回数据
 const success = (code, data) => {
@@ -13,14 +13,14 @@ const success = (code, data) => {
 
 
 // 生成token
-const getToken = (username) => {
-  const token = jwt.sign({ username }, pk)
+const getToken = (uid) => {
+  const token = jwt.sign({ uid }, PK)
   return token
 }
 
 // 验证token
 const checkToken = (token) => {
-  const result = jwt.verify(token, pk)
+  const result = jwt.verify(token, PK)
   return result
 }
 

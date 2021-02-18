@@ -11,6 +11,8 @@ import {
   Avatar,
   Dropdown,
   Menu,
+  Table,
+  Modal
 } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';
 import { MessageApi } from 'ant-design-vue/lib/message';
@@ -33,6 +35,8 @@ export function importAntd(app: App<Element>) {
   .use(Avatar)
   .use(Dropdown)
   .use(Menu)
+  .use(Table)
+  .use(Modal)
 
   app.config.globalProperties.$message = message
 }

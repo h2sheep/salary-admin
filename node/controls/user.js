@@ -19,7 +19,7 @@ const login = async (req, res) => {
     if (result.password === password) {
       // 生成token并放在响应头中
       res.set({
-        'Authorization': getToken(result.username),
+        'Authorization': getToken(result.id),
         'Access-Control-Expose-Headers': 'Authorization'  // 浏览器只能获取默认字段
       })
       res.send(success(OK, {

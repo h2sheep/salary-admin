@@ -5,14 +5,9 @@
     <a-row>
       <a-col :span="24">
         <Suspense>
-
-        <template #default>
-          <admin-header />
-        </template>
-
-        <template #fallback>loading...</template>
-
-      </Suspense>
+          <template #default><admin-header /></template>
+          <template #fallback>loading...</template>
+        </Suspense>
         
       </a-col>
     </a-row>
@@ -26,7 +21,9 @@
       <a-col :span="4"><admin-list /></a-col>
 
       <!-- content -->
-      <a-col :span="19" class="admin-content"><router-view /></a-col>
+      <a-col :span="19" class="admin-content">
+        <router-view />
+      </a-col>
     </a-row>
   </div>
 
@@ -39,15 +36,11 @@
   import AdminHeader from './cpn/AdminHeader.vue'
   import AdminList from './cpn/AdminList.vue'
 
-  import { IUseAdmin, useAdmin } from '@/hooks/user'
-
   export default defineComponent({
     components: {
       AdminHeader,
       AdminList,
     },
-    setup() {
-    }
   })
 
 </script>
@@ -62,6 +55,7 @@
 
       .admin-content {
         height: 100%;
+        padding: 10px;
         min-height: 100vh;
         background-color: #fff;
       }

@@ -7,6 +7,7 @@ var logger = require('morgan');
 const cors = require('cors')
 
 const usersRouter = require('./routes/users');
+const sectionsRouter = require('./routes/sections')
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 跨域
 app.use(cors())
 
-app.use('/users', usersRouter);
+app.use('/users', usersRouter)
+app.use('/sections', sectionsRouter)
 
 module.exports = app;

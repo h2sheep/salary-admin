@@ -4,8 +4,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: category === 0}"
-      @click="changeCategory(0)"
+      :class="{active: path === '/admin/chart'}"
+      @click="changeCategory('/admin/chart')"
     >
       <BarChartOutlined />
       <span class="item-name">报表统计</span>
@@ -13,8 +13,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: category === 1}"
-      @click="changeCategory(1)"
+      :class="{active: path === '/admin/section'}"
+      @click="changeCategory('/admin/section')"
     >
       <ContainerOutlined />
       <span class="item-name">部门管理</span>
@@ -22,8 +22,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: category === 2}"
-      @click="changeCategory(2)"
+      :class="{active: path === '/admin/staff'}"
+      @click="changeCategory('/admin/staff')"
     >
       <UserOutlined />
       <span class="item-name">员工信息</span>
@@ -31,8 +31,8 @@
 
     <li 
       class="admin-item"
-      :class="{active: category === 3}" 
-      @click="changeCategory(3)"
+      :class="{active: path === '/admin/salary'}" 
+      @click="changeCategory('/admin/salary')"
     >
       <AccountBookOutlined />
       <span class="item-name">工资管理</span>
@@ -40,8 +40,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: category === 4}"
-      @click="changeCategory(4)"
+      :class="{active: path === '/admin/update'}"
+      @click="changeCategory('/admin/update')"
     >
       <SettingOutlined />
       <span class="item-name">修改密码</span>
@@ -60,8 +60,8 @@
     SettingOutlined
   } from '@ant-design/icons-vue';
 
-  import { defineComponent, ref } from 'vue'
-  import { useRouter } from 'vue-router';
+  import { defineComponent, ref, watch, watchEffect } from 'vue'
+  import { useRoute, useRouter } from 'vue-router';
 
   export default defineComponent({
     components: {
@@ -74,38 +74,20 @@
     setup() {
 
       const router = useRouter()
+      const route = useRoute()
 
-      const category = ref(0)
+      const path = ref('')
 
-      const changeCategory = (selfCategory: number) => {
-        category.value = selfCategory
-        _changeCategory(selfCategory)
-      }
+      watchEffect(() => {
+        path.value = route.path
+      })
 
-      function _changeCategory(category: number): void {
-        switch (category) {
-          case 0:
-            router.push('/admin/chart')
-            break
-          case 1:
-            router.push('/admin/section')
-            break
-          case 2:
-            router.push('/admin/staff')
-            break
-          case 3:
-            router.push('/admin/salary')
-            break
-          case 4:
-            router.push('/admin/update')
-            break
-          default:
-            break
-        }
+      const changeCategory = (pathname: string) => {
+        router.replace(pathname)
       }
 
       return {
-        category,
+        path,
         changeCategory
       }
     }
@@ -124,7 +106,7 @@
       padding: 20px 5px;
       font-size: 16px;
       color: #fff;
-      transition: all .6s;
+      transition: all .3s;
 
       &.active,
       &:hover {

@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
 
 const { login, isAuth, getAdminAccount, getUserInfo, removeUser } = require('../controls/user')

@@ -26,13 +26,13 @@
   * sectionid
   * name
   * count
+  * staff[]
 
 ###### 员工
 
 * staff：每位员工
   * name：姓名
   * age：年龄
-  * tel：电话
   * gender：性别
   * section：部门
   * job：职位
