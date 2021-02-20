@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1/salary-admin', { 
   useNewUrlParser: true, 
   useUnifiedTopology: true, 
-  useFindAndModify: true 
+  useFindAndModify: false 
 })
   .then(() => console.log('连接成功。'))
   .catch(err => console.log('连接失败。'))

@@ -1,30 +1,28 @@
-const { addOne, getAll, updateOne, deleteOne } = require("../models/section")
+const { addOne, getAll, updateName, deleteOne } = require("../models/section")
+const { deleteMany } = require("../models/staff")
 const { OK, NO_EXIST } = require("../routes/status")
 const { success } = require("../utils")
 
-// 添加部门
+// 添加新部门
 const addSection = async (req, res) => {
-  const { name, count } = req.body
+  const { name } = req.body
+  const nowTime = new Date().getTime()
 
   const section = {
+    sectionid: 'st' + nowTime,
     name,
-    count: count * 1
+    count: 0
   }
 
   try {
-    const result = await addOne(section)
-
-    res.send(success(OK, {
-      _id: result._id,
-      name: result.name,
-      count: result.count
-    }))
+    await addOne(section)
+    res.send(success(OK, section))
   } catch (e) {
     console.log(e)
   }
 }
 
-// 获取部门
+// 获取所有部门信息
 const getSections = async (req, res) => {
   try {
     const result = await getAll()
@@ -36,10 +34,12 @@ const getSections = async (req, res) => {
 
 // 修改部门信息
 const updateSection = async (req, res) => {
-  const { sectionid, name, count } = req.body
+  const { sectionid, name } = req.body
+
+  console.log(sectionid, name)
 
   try {
-    await updateOne(sectionid, { name, count })
+    await updateName(sectionid, name)
     res.send(success(OK))
   } catch (e) {
     console.log(e)
@@ -52,7 +52,12 @@ const deleteSection = async (req, res) => {
 
   try {
     const result = await deleteOne(sectionid)
-    result ? res.send(success(OK)) : res.send(success(NO_EXIST, '不存在该数据'))
+    // 删除成功
+    if (result) {
+      // 删除部门员工
+      await deleteMany(sectionid)
+      res.send(success(OK))
+    }
   } catch (e) {
     console.log(e)
   }

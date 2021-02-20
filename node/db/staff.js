@@ -5,12 +5,15 @@ require('./common')
 
 
 const StaffSchema = mongoose.Schema({
+  staffid: String,
+  sectionid: String,
   name: String,
   age: Number,
   gender: Number,
-  section: String, 
   salary: Number,
   job: String
 })
 
-module.exports = StaffSchema
+const StaffModel = mongoose.model('staff', StaffSchema)
+
+module.exports = StaffModel

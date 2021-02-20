@@ -1,0 +1,9 @@
+
+const Types = {
+  SIGN_IN: 'SIGN_IN',
+  LOG_IN: 'LOG_IN',
+  SET_ADMIN_INFO: 'SET_ADMIN_INFO',
+  UPDATE_ADMIN_PASSWORD: 'UPDATE_ADMIN_PASSWORD'
+}
+
+export default Types

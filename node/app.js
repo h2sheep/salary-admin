@@ -8,6 +8,7 @@ const cors = require('cors')
 
 const usersRouter = require('./routes/users');
 const sectionsRouter = require('./routes/sections')
+const staffRouter = require('./routes/staff')
 
 var app = express();
 
@@ -22,5 +23,6 @@ app.use(cors())
 
 app.use('/users', usersRouter)
 app.use('/sections', sectionsRouter)
+app.use('/staff', staffRouter)
 
 module.exports = app;

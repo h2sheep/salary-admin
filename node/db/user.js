@@ -7,10 +7,10 @@ require('./common')
 
 // 创建一个user schema
 const UserSchema = mongoose.Schema({
+  userid: String,
+  nickname: String,
   username: String,
-  password: String,
-  level: Number,
-  avatar: String
+  password: String
 })
 
 // 用户集合

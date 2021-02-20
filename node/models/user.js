@@ -1,27 +1,23 @@
 const UsersModel = require('../db/user')
 
-// 根据条件查询用户
-const findOne = (condition) => {
-  return UsersModel.findOne(condition)
-}
 
-// 根据id查询用户
-const findById = (uid) => {
-  return UsersModel.findById(uid, '-password -_id -__v')
-}
-
-//  添加用户
-const signup = (user) => {
+// 创建一个用户
+const createOne = (user) => {
   return UsersModel.create(user)
 }
 
-// 删除用户
-const removeUSer = (uid) => {
-  return UsersModel.findByIdAndRemove(uid)
+// 根据条件查询用户
+const findOne = (condition) => {
+  return UsersModel.findOne(condition, { _id: 0, __v: 0, password: 0 })
 }
 
+// 修改用户信息
+const updateOne = (userid, condition) => {
+  return UsersModel.updateOne({ userid }, condition)
+}
+
+
+exports.createOne = createOne
 exports.findOne = findOne
-exports.findById = findById
-exports.signup = signup
-exports.removeUSer = removeUSer
+exports.updateOne = updateOne
 

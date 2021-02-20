@@ -3,12 +3,10 @@ const mongoose = require('mongoose')
 
 require('./common')
 
-const StaffSchema = require('./staff')
-
 const SectionSchemal = mongoose.Schema({
+  sectionid: String,
   name: String,
   count: Number,
-  staff: [StaffSchema]
 })
 
 const SectionModel = mongoose.model('section', SectionSchemal)

@@ -2,18 +2,19 @@ var express = require('express')
 var router = express.Router()
 
 
-const { login, isAuth, getAdminAccount, getUserInfo, removeUser } = require('../controls/user')
+const { signin, login, isAuth, getUserInfo, updatePassword } = require('../controls/user')
 
-// 获取管理员账号
-router.get('/get', getAdminAccount)
+
+// 注册
+router.post('/signin', signin)
 
 // 用户登录
 router.post('/login', login)
 
-// 返回用户信息
+// 获取用户信息
 router.get('/info', isAuth, getUserInfo)
 
-// 删除用户
-router.delete('/delete', removeUser)
+// 修改密码
+router.patch('/update', isAuth, updatePassword)
 
 module.exports = router
