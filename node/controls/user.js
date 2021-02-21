@@ -1,6 +1,6 @@
 
 const UserModel = require('../models/user')
-const { OK, QUERY_ERROR, NO_EXIST, LOG_IN } = require('../routes/status')
+const { OK, QUERY_ERROR, NO_EXIST, LOG_IN, HAS_EXIST } = require('../routes/status')
 const { success, getToken, checkToken } = require('../utils')
 
 
@@ -24,7 +24,7 @@ const signin = async (req, res) => {
 
   try {
     const result = await UserModel.createOne(user)
-    res.send(success(OK, result))
+    res.send(success(OK))
   } catch (e) {
     console.log(e)
   }
@@ -36,19 +36,21 @@ const login = async (req, res) => {
 
   try {
     // 先查询是否有该用户
-    const result = await UserModel.findOne({ username })
+    const result = await UserModel.findOneSp(username)
     // 不存在直接返回
     if (!result) res.send(success(NO_EXIST, '该用户不存在'))
+
+    console.log(result)
 
     // 如果密码不正确直接返回
     if (result.password !== password) return res.send(success(QUERY_ERROR, '用户名或密码不正确'))
 
     // 生成token并放在响应头中
     res.set({
-      'Authorization': getToken(result.id),
+      'Authorization': getToken(result.userid),
       'Access-Control-Expose-Headers': 'Authorization'  // 浏览器只能获取默认字段
     })
-    res.send(success(OK, { uid: result.id }))
+    res.send(success(OK, { uid: result.userid }))
   } catch (e) {
     console.log(e)
   }
@@ -83,7 +85,7 @@ const updatePassword = async (req, res) => {
 
   try {
     await UserModel.updateOne(uid, { password })
-    res.send(success(LOG_IN, '需要登录'))
+    res.send(success(OK))
   } catch (e) {
     console.log(e)
   }

@@ -13,7 +13,8 @@ import {
   Menu,
   Table,
   Modal,
-  Select
+  Select,
+  Tabs
 } from 'ant-design-vue'
 
 import 'ant-design-vue/dist/antd.css';
@@ -43,6 +44,7 @@ export function importAntd(app: App<Element>) {
   .use(Table)
   .use(Modal)
   .use(Select)
+  .use(Tabs)
 
   app.config.globalProperties.$message = message
   app.config.globalProperties.$confirm = Modal.confirm

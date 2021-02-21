@@ -1,5 +1,10 @@
 import IBaseSuccess from "./common";
 
+// 请求注册接口
+export interface ISigninResult extends IBaseSuccess {
+  data: [string]
+}
+
 // 注册接口
 export interface ISignin {
   nickname: string

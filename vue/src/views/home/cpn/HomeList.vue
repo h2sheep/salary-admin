@@ -4,8 +4,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: path === '/admin/chart'}"
-      @click="changeCategory('/admin/chart')"
+      :class="{active: path === '/home/chart'}"
+      @click="changeCategory('/home/chart')"
     >
       <BarChartOutlined />
       <span class="item-name">报表统计</span>
@@ -13,8 +13,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: path === '/admin/section'}"
-      @click="changeCategory('/admin/section')"
+      :class="{active: path === '/home/section'}"
+      @click="changeCategory('/home/section')"
     >
       <ContainerOutlined />
       <span class="item-name">部门管理</span>
@@ -22,8 +22,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: path === '/admin/staff'}"
-      @click="changeCategory('/admin/staff')"
+      :class="{active: path === '/home/staff'}"
+      @click="changeCategory('/home/staff')"
     >
       <UserOutlined />
       <span class="item-name">员工信息</span>
@@ -31,8 +31,8 @@
 
     <li 
       class="admin-item"
-      :class="{active: path === '/admin/salary'}" 
-      @click="changeCategory('/admin/salary')"
+      :class="{active: path === '/home/salary'}" 
+      @click="changeCategory('/home/salary')"
     >
       <AccountBookOutlined />
       <span class="item-name">工资管理</span>
@@ -40,8 +40,8 @@
 
     <li 
       class="admin-item" 
-      :class="{active: path === '/admin/update'}"
-      @click="changeCategory('/admin/update')"
+      :class="{active: path === '/home/reset'}"
+      @click="changeCategory('/home/reset')"
     >
       <SettingOutlined />
       <span class="item-name">修改密码</span>
@@ -52,16 +52,11 @@
 </template>
 
 <script lang='ts'>
-  import {
-    BarChartOutlined,
-    ContainerOutlined,
-    UserOutlined,
-    AccountBookOutlined,
-    SettingOutlined
-  } from '@ant-design/icons-vue';
+  import { BarChartOutlined, ContainerOutlined, UserOutlined, AccountBookOutlined, SettingOutlined } from '@ant-design/icons-vue';
 
-  import { defineComponent, ref, watch, watchEffect } from 'vue'
-  import { useRoute, useRouter } from 'vue-router';
+  import { defineComponent, ref, watchEffect } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+
 
   export default defineComponent({
     components: {

@@ -115,6 +115,10 @@
       }
 
       const handleOk = () => {
+        if (!info.name) return proxy?.$message.warn('请填写姓名')
+        if (!info.sectionid) return proxy?.$message.warn('请选择部门')
+        if (!info.job) return proxy?.$message.warn('请填写职位')
+
         // 修改
         if (info.staffid) {
           const staff: IStaff = {

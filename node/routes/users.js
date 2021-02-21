@@ -15,6 +15,6 @@ router.post('/login', login)
 router.get('/info', isAuth, getUserInfo)
 
 // 修改密码
-router.patch('/update', isAuth, updatePassword)
+router.patch('/reset', isAuth, updatePassword)
 
 module.exports = router

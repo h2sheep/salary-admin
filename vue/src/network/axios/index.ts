@@ -15,7 +15,7 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.request.use((request: AxiosRequestConfig) => {
 
   // 添加token
-  request.headers['Authorization'] = localStorage.getItem('token')
+  request.headers['Authorization'] = localStorage.getItem('salary-admin-token')
 
   return request
 }, (error: AxiosError) => {
@@ -24,16 +24,16 @@ instance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 instance.interceptors.response.use((response: AxiosResponse) => {
    // 保存token
-  if (response.headers['authorization']) localStorage.setItem('token', response.headers['authorization'])
+  if (response.headers['authorization']) localStorage.setItem('salary-admin-token', response.headers['authorization'])
 
   const result = response.data
   // 未登录 跳转登录页面
-  if (result.code === LOG_IN) window.location.pathname = '/login'
+  if (result.code === LOG_IN) window.location.pathname = '/user'
   
   // 返回数据
   return result
 }, (error: AxiosError) => {
-  console.log(error)
+  console.dir(error)
 })
 
 

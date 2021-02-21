@@ -3,27 +3,17 @@
   <div class="admin">
     <!-- header -->
     <a-row>
-      <a-col :span="24">
-        <Suspense>
-          <template #default><admin-header /></template>
-          <template #fallback>loading...</template>
-        </Suspense>
-        
-      </a-col>
+      <a-col :span="24"><home-header /></a-col>
     </a-row>
 
     <!-- main -->
-    <a-row 
-      class="main"
-      type="flex" justify="space-between"
-    >
-      <!-- list -->
-      <a-col :span="4"><admin-list /></a-col>
+    <a-row type="flex" justify="space-between" class="main">
 
+      <!-- list -->
+      <a-col :span="4"><home-list /></a-col>
       <!-- content -->
-      <a-col :span="19" class="admin-content">
-        <router-view />
-      </a-col>
+      <a-col :span="19" class="admin-content"><router-view /></a-col>
+      
     </a-row>
   </div>
 
@@ -33,13 +23,13 @@
 
   import { defineComponent } from 'vue'
 
-  import AdminHeader from './cpn/AdminHeader.vue'
-  import AdminList from './cpn/AdminList.vue'
+  import HomeHeader from './cpn/HomeHeader.vue'
+  import HomeList from './cpn/HomeList.vue'
 
   export default defineComponent({
     components: {
-      AdminHeader,
-      AdminList,
+      HomeHeader,
+      HomeList,
     },
   })
 

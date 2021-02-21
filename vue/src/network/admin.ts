@@ -1,11 +1,10 @@
-import { ISignin, ILogin } from './../typings/admin';
+import { ISignin, ILogin } from '@/typings/admin';
 import request from './axios'
 
 // 注册
 export function signIn<T>(admin: ISignin) {
   return request.post<T, T>('/users/signin', admin)
 }
-
 
 // 登录
 export function logIn<T>(admin: ILogin) {
@@ -20,8 +19,8 @@ export function getAdminInfo<T>(uid: string) {
 }
 
 // 修改密码
-export function updateAdminPassword<T>(uid: string, password: string) {
-  return request.patch<T, T>('/users/update', {
+export function resetAdminPassword<T>(uid: string, password: string) {
+  return request.patch<T, T>('/users/reset', {
     uid,
     password
   })
