@@ -7,6 +7,7 @@ const SectionSchemal = mongoose.Schema({
   sectionid: String,
   name: String,
   count: Number,
+  expenditure: Number
 })
 
 const SectionModel = mongoose.model('section', SectionSchemal)

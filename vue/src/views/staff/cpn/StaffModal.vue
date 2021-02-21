@@ -27,7 +27,11 @@
 
       <div class="modal-label" v-if="mode === 'add'">
         <span>部门: </span>
-        <section-select @change="onSectionChange" !showAllOptions />
+        <a-select v-model:value="info.sectionid">
+          <template v-for="section in sectionList" :key="section.sectionid">
+            <a-select-option :value="section.sectionid">{{ section.name }}</a-select-option>
+          </template>
+        </a-select>
       </div>
 
       <div class="modal-label">
@@ -46,8 +50,9 @@
 
 <script lang="ts">
 
-  import { IBaseStaff, IStaff, STAFF_GENDER } from '@/typings/staff'
-  import { defineComponent, reactive, getCurrentInstance, ComponentInternalInstance, onMounted, toRefs } from 'vue'
+  import store from '@/store'
+import { IBaseStaff, IStaff, STAFF_GENDER } from '@/typings/staff'
+  import { defineComponent, reactive, getCurrentInstance, ComponentInternalInstance, onMounted, toRefs, computed } from 'vue'
 
   import SectionSelect from './SectionSelect.vue'
 
@@ -152,6 +157,7 @@
       return {
         GENDER,
         ...toRefs(state),
+        sectionList: computed(() => store.state.section.sectionList),
         info,
         handleOk,
         onTextchange,

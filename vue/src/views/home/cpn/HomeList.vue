@@ -4,15 +4,6 @@
 
     <li 
       class="admin-item" 
-      :class="{active: path === '/home/chart'}"
-      @click="changeCategory('/home/chart')"
-    >
-      <BarChartOutlined />
-      <span class="item-name">报表统计</span>
-    </li>
-
-    <li 
-      class="admin-item" 
       :class="{active: path === '/home/section'}"
       @click="changeCategory('/home/section')"
     >
@@ -36,6 +27,15 @@
     >
       <AccountBookOutlined />
       <span class="item-name">工资管理</span>
+    </li>
+
+    <li 
+      class="admin-item" 
+      :class="{active: path === '/home/chart'}"
+      @click="changeCategory('/home/chart')"
+    >
+      <BarChartOutlined />
+      <span class="item-name">报表统计</span>
     </li>
 
     <li 

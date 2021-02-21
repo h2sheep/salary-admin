@@ -23,12 +23,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     component: Home,
-    redirect: '/home/chart',
+    redirect: '/home/section',
     children: [
-      { path: 'chart', component: Chart },
       { path: 'section', component: Sections },
       { path: 'staff', component: Staff },
       { path: 'salary', component: Salary },
+      { path: 'chart', component: Chart },
       { path: 'reset', component: Reset }
     ]
   }

@@ -8,7 +8,7 @@
     </a-button>
 
     <!-- 部门选择框 -->
-    <staff-select @change="setStaffList" showAllOptions />
+    <staff-select @change="setStaffList" />
 
     <!-- 表格主体 -->
     <staff-table :data="data" @remove="deleteStaffItem" />

@@ -7,7 +7,7 @@ const addOne = (section) => {
 
 // 获取所有部门
 const getAll = () => {
-  return SectionModel.find({}, { _id: 0, __v: 0 })
+  return SectionModel.find({}, { _id: 0, __v: 0, expenditure: 0 })
 }
 
 // 修改部门名称
@@ -20,22 +20,16 @@ const deleteOne = (sectionid) => {
   return SectionModel.deleteOne(({ sectionid }))
 }
 
-// 添加部门员工数量
-const incSectionCount = (sectionid) => {
+// 改变部门信息值
+const incSectionInfo = (sectionid, condition) => {
   return SectionModel.updateOne({ sectionid }, {
-    '$inc': {
-      count: 1
-    }
+    '$inc': condition
   })
 }
 
-// 减少部门员工数量
-const decSectionCount = (sectionid) => {
-  return SectionModel.updateOne({ sectionid }, {
-    '$inc': {
-      count: -1
-    }
-  })
+// 图表数据
+const getChartInfo = () => {
+  return SectionModel.find({}, { name: 1, expenditure: 1, _id: 0 })
 }
 
 
@@ -44,5 +38,5 @@ exports.getAll = getAll
 exports.updateName = updateName
 exports.deleteOne = deleteOne
 
-exports.incSectionCount = incSectionCount
-exports.decSectionCount = decSectionCount
+exports.incSectionInfo = incSectionInfo
+exports.getChartInfo = getChartInfo

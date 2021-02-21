@@ -24,3 +24,8 @@ export function deleteSectionItem<T>(sectionid: string) {
     data: { sectionid }
   })
 }
+
+// 获取部门图表
+export function getSectionChart<T>() {
+  return request.get<T, T>('/sections/chart')
+}

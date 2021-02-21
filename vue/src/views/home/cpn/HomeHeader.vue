@@ -62,8 +62,13 @@
 
 <style lang="less" scoped>
   .admin-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     padding: 20px 0;
     background-color: rgb(17, 16, 16);
+    z-index: 999;
 
     h2 { 
       margin: 0; 

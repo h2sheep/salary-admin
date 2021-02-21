@@ -1,4 +1,4 @@
-const { incSectionCount, decSectionCount } = require("../models/section")
+const { incSectionInfo } = require("../models/section")
 const { addOne, getAll, deleteOne, updateOne } = require("../models/staff")
 const { OK } = require("../routes/status")
 const { success } = require("../utils")
@@ -20,7 +20,10 @@ const addStaff = async (req, res) => {
       job
     }
     await addOne(staff)
-    await incSectionCount(sectionid)
+    await incSectionInfo(sectionid, {
+      count: 1,
+      expenditure: staff.salary
+    })
 
     res.send(success(OK, staff))
   } catch (e) {
@@ -50,7 +53,9 @@ const deleteStaff = async (req, res) => {
     // 删除成功
     if (result) {
       // 数量减1
-      const result2 = await decSectionCount(sectionid)
+      const result2 = await incSectionInfo(sectionid, {
+        count: -1
+      })
       console.log(result2)
       res.send(success(OK))
     }

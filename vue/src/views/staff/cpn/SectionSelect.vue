@@ -1,6 +1,6 @@
 <template>
   <a-select v-model:value="state.curSectionid">
-    <a-select-option value="" v-if="showAllOptions">所有部门</a-select-option>
+    <a-select-option value="">所有部门</a-select-option>
     <template
       v-for="section in list" :key="section.sectionid"
     >
@@ -17,9 +17,6 @@
   import { IGlobalState } from '@/store'
 
   export default defineComponent({
-    props: {
-      showAllOptions: Boolean
-    },
     emits: ['change'],
     setup(props, { emit }) {
 

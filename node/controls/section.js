@@ -1,4 +1,4 @@
-const { addOne, getAll, updateName, deleteOne } = require("../models/section")
+const { addOne, getAll, updateName, deleteOne, getChartInfo } = require("../models/section")
 const { deleteMany } = require("../models/staff")
 const { OK, NO_EXIST } = require("../routes/status")
 const { success } = require("../utils")
@@ -11,7 +11,8 @@ const addSection = async (req, res) => {
   const section = {
     sectionid: 'st' + nowTime,
     name,
-    count: 0
+    count: 0,
+    expenditure: 0
   }
 
   try {
@@ -63,8 +64,18 @@ const deleteSection = async (req, res) => {
   }
 }
 
+// 获取部门图表数据
+const getSectionChart = async (req, res) => {
+  try {
+    const result = await getChartInfo()
+    res.send(success(OK, result))
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 exports.addSection = addSection
 exports.getSections = getSections
 exports.updateSection = updateSection
 exports.deleteSection = deleteSection
+exports.getSectionChart = getSectionChart

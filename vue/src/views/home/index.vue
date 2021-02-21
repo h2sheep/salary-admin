@@ -37,16 +37,20 @@
 
 <style scoped lang='less'>
   .admin {
+    box-sizing: border-box;
     width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding-top: 80px;
     background-color: rgb(245, 241, 245);
 
     .main {
+      height: 100%;
       margin-top: 10px;
 
       .admin-content {
         height: 100%;
         padding: 10px;
-        min-height: 100vh;
         background-color: #fff;
       }
     }
