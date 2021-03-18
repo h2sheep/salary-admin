@@ -48,7 +48,7 @@
       const logout = (): void => {
         removeLocalstorage('salary-admin-token')
         removeLocalstorage('salary-admin-uid')
-        router.replace('/login')
+        router.replace('/user')
       }
 
       return {
