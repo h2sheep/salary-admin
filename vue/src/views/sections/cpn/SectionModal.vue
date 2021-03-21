@@ -52,6 +52,7 @@
       proxy?.$bus.on<ISection>('editSectionItem', (section) => {
         state.sectionid = section!.sectionid
         state.name = section!.name
+        state.count = section!.count
         show.value = true
       })
 
