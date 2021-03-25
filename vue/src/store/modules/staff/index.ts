@@ -46,7 +46,7 @@ export const staff: Module<IStaffState, IGlobalState> = {
       commit(Types.ADD_STAFF_ITEM, result.data)
     },
     async [Types.DELETE_STAFF_ITEM]({ commit }, payload: IDeleteStaff) {
-      const result = await deleteStaffItem<IBaseSuccess>(payload.secionid, payload.staffid)
+      const result = await deleteStaffItem<IBaseSuccess>(payload.sectionid, payload.staffid)
       if (result.code === 0) commit(Types.DELETE_STAFF_ITEM, payload.staffid)
     },
     async [Types.UPDATE_STAFF_ITEM]({ commit }, staff: IStaff) {

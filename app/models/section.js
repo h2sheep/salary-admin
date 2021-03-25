@@ -17,7 +17,7 @@ const updateName = (sectionid, name) => {
 
 // 删除一个部门
 const deleteOne = (sectionid) => {
-  return SectionModel.deleteOne(({ sectionid }))
+  return SectionModel.deleteOne({ sectionid })
 }
 
 // 改变部门信息值

@@ -1,3 +1,4 @@
+import { section } from './../store/modules/section/index';
 import IBaseSuccess from "./common";
 
 // 请求列表接口
@@ -27,7 +28,7 @@ export interface IBaseStaff {
 
 // 删除员工接口
 export interface IDeleteStaff {
-  secionid: string
+  sectionid: string
   staffid: string
 }
 

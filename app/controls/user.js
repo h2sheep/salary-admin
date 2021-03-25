@@ -40,8 +40,6 @@ const login = async (req, res) => {
     // 不存在直接返回
     if (!result) res.send(success(NO_EXIST, '该用户不存在'))
 
-    console.log(result)
-
     // 如果密码不正确直接返回
     if (result.password !== password) return res.send(success(QUERY_ERROR, '用户名或密码不正确'))
 

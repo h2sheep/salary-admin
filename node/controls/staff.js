@@ -49,14 +49,13 @@ const deleteStaff = async (req, res) => {
 
   try {
     const result = await deleteOne(staffid)
-    console.log(result)
+
     // 删除成功
     if (result) {
       // 数量减1
       const result2 = await incSectionInfo(sectionid, {
         count: -1
       })
-      console.log(result2)
       res.send(success(OK))
     }
   } catch (e) {
