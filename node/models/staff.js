@@ -25,6 +25,11 @@ const deleteMany = (sectionid) => {
   return StaffModel.deleteMany({ sectionid })
 }
 
+// 获取某个员工
+const findOne = (staffid) => {
+  return StaffModel.findOne({ staffid })
+}
+
 // 修改某个员工信息
 const updateOne = (staffid, staff) => {
   return StaffModel.findOneAndUpdate({ staffid }, staff)
@@ -34,4 +39,5 @@ exports.addOne = addOne
 exports.getAll = getAll
 exports.deleteOne = deleteOne
 exports.deleteMany = deleteMany
+exports.findOne = findOne
 exports.updateOne = updateOne

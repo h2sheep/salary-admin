@@ -1,5 +1,5 @@
 const { incSectionInfo } = require("../models/section")
-const { addOne, getAll, deleteOne, updateOne } = require("../models/staff")
+const { addOne, getAll, deleteOne, findOne, updateOne } = require("../models/staff")
 const { OK } = require("../routes/status")
 const { success } = require("../utils")
 
@@ -69,6 +69,19 @@ const updateStaff = async (req, res) => {
   const { staffid, sectionid, name, age, gender, salary, job } = req.body
 
   try {
+    // 先找到当前员工
+    const staff = await findOne(staffid)
+
+    console.log('当前员工', staff)
+
+    // 如果改变了薪水就要更改部门支出
+    if (staff.salary !== salary * 1) {
+      await incSectionInfo(sectionid, {
+        expenditure: salary * 1 - staff.salary
+      })
+    }
+
+    // 更新员工信息
     await updateOne(staffid, { 
       sectionid, 
       name, 
