@@ -1,4 +1,4 @@
-import { IBaseStaff, IStaff } from '@/typings/staff'
+import { IAddStaff, IStaff } from '@/typings/staff'
 import request from './axios'
 
 // 获取员工
@@ -13,7 +13,7 @@ export function getStaffList<T>(sectionid?: string) {
 }
 
 // 添加员工
-export function addStaffItem<T>(staff:IBaseStaff) {
+export function addStaffItem<T>(staff:IAddStaff) {
   return request.post<T, T>('/staff/add', staff)
 }
 

@@ -18,18 +18,15 @@
   import { ComponentInternalInstance, defineComponent, getCurrentInstance, PropType } from 'vue';
 
   const columns = [
-    {
-      title: '姓名',
-      dataIndex: 'name',
-    },
-    {
-      title: '职位',
-      dataIndex: 'job',      
-    },   
-    {
-      title: '工资',
-      dataIndex: 'salary',
-    },
+    { title: '姓名', dataIndex: 'name' },
+    { title: '职位', dataIndex: 'job' },   
+    { title: '基础工资', dataIndex: 'base' },
+    { title: '绩效奖金', dataIndex: 'extra' },
+    { title: '加班工资', dataIndex: 'overtime' },
+    { title: '全勤奖', dataIndex: 'fullmonth' },
+    { title: '食宿补贴', dataIndex: 'eatandlive' },
+    { title: '交通补贴', dataIndex: 'transportation' },
+    { title: '总共工资', dataIndex: 'salary' },
     {
       title: '操作',
       dataIndex: 'action',
@@ -52,13 +49,14 @@
         FEMALE: STAFF_GENDER.FEMALE
       }
 
+      // 删除事件
       const remove = (staff: IStaff) => {
         emit('remove', staff.sectionid, staff.staffid)
       }
 
       // 编辑事件
       const edit = (staff: IStaff) => {
-        proxy?.$bus.emit('editStaff', staff)
+        proxy?.$bus.emit('editSalary', staff)
       }
 
       return {

@@ -16,7 +16,7 @@
     setup(props) {
       watchEffect(() => {
         if (props.data &&  props.data?.length >= 1) {
-          console.log(props.data)
+          // console.log(props.data)
           const chart = new Chart({
             container: 'my-chart',
             autoFit: true,

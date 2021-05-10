@@ -36,10 +36,6 @@
       dataIndex: 'job',      
     },   
     {
-      title: '工资',
-      dataIndex: 'salary',
-    },
-    {
       title: '操作',
       dataIndex: 'action',
       slots: { customRender: 'action' },

@@ -33,6 +33,19 @@
   * job：职位 enum
   * salary：工资
 
+#### 工资补充
+
+* 工资由多部份组成
+* 应该设置多个字段
+* 总工资
+  * 基础工资 base
+  * 绩效奖金 extra
+  * 加班工资 overtime
+  * 全勤奖 fullmonth
+  * 食宿补贴 eatandlive
+  * 交通补贴 transportation
+  * 节日补贴 holiday
+
 ### CRUD
 
 #### 用户功能

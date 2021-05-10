@@ -2,33 +2,33 @@
     <h2 class="admin-list-title">工资管理</h2>
 
     <!-- 部门选择框 -->
-    <staff-select @change="setStaffList" showAllOptions />
+    <salary-select @change="setStaffList" showAllOptions />
 
     <!-- 表格主体 -->
-    <staff-table :data="data" @remove="deleteStaffItem" />
+    <salary-table :data="data" @remove="deleteStaffItem" />
 
     <!-- 弹窗 -->
-    <staff-modal @add="addStaffItem" @update="updateStaffItem" />
+    <salary-modal @add="addStaffItem" @update="updateStaffItem" />
 </template>
 
 <script lang='ts'>
 
-  import { ComponentInternalInstance, computed, defineComponent, getCurrentInstance, onMounted, reactive } from 'vue'
+  import { computed, defineComponent } from 'vue'
   import { useStore } from 'vuex'
   import { IGlobalState } from '@/store'
 
-  import StaffModal from './cpn/StaffModal.vue'
-  import StaffSelect from './cpn/SectionSelect.vue'
-  import StaffTable from './cpn/StaffTable.vue'
+  import SalaryModal from './cpn/SalaryModal.vue'
+  import SalarySelect from './cpn/SalarySelect.vue'
+  import SalaryTable from './cpn/SalaryTable.vue'
   import { PlusOutlined } from '@ant-design/icons-vue'
 
   import { IUseStaff, useStaff } from '@/hooks/staff'
 
   export default defineComponent({
     components: {
-      StaffModal,
-      StaffSelect,
-      StaffTable,
+      SalaryModal,
+      SalarySelect,
+      SalaryTable,
       PlusOutlined
     },
     setup() {
@@ -36,18 +36,11 @@
       const store = useStore<IGlobalState>()
       const data = computed(() => store.state.staff.staffList)
 
-      const { proxy } = getCurrentInstance() as ComponentInternalInstance
-      // 添加事件
-      const open = () => {
-        proxy?.$bus.emit('addStaff')
-      }
-
       const { setStaffList, addStaffItem, deleteStaffItem, updateStaffItem }: IUseStaff = useStaff()
       setStaffList()
 
       return {
         data,
-        open,
         setStaffList,
         addStaffItem,
         deleteStaffItem,

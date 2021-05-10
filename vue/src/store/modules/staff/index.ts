@@ -2,7 +2,7 @@ import { Module } from 'vuex'
 import { IGlobalState } from '@/store'
 import Types from './actionTypes'
 
-import { IAddResult, IBaseStaff, IStaff, IStaffResult, IDeleteStaff } from '@/typings/staff'
+import { IAddResult, IAddStaff, IStaff, IStaffResult, IDeleteStaff } from '@/typings/staff'
 import IBaseSuccess from '@/typings/common'
 
 import { addStaffItem, deleteStaffItem, getStaffList, updateStaffItem } from '@/network/staff'
@@ -41,7 +41,7 @@ export const staff: Module<IStaffState, IGlobalState> = {
       const result = await getStaffList<IStaffResult>(sectionid)
       commit(Types.SET_STAFF_LIST, result.data)
     },
-    async [Types.ADD_STAFF_ITEM]({ commit }, staff: IBaseStaff) {
+    async [Types.ADD_STAFF_ITEM]({ commit }, staff: IAddStaff) {
       const result = await addStaffItem<IAddResult>(staff)
       commit(Types.ADD_STAFF_ITEM, result.data)
     },

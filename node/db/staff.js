@@ -11,7 +11,13 @@ const StaffSchema = mongoose.Schema({
   age: Number,
   gender: Number,
   salary: Number,
-  job: String
+  job: String,
+  base: Number,
+  extra: Number,
+  overtime: Number,
+  fullmonth: Number,
+  eatandlive: Number,
+  transportation:Number,
 })
 
 const StaffModel = mongoose.model('staff', StaffSchema)

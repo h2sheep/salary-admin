@@ -1,4 +1,3 @@
-import { section } from './../store/modules/section/index';
 import IBaseSuccess from "./common";
 
 // 请求列表接口
@@ -11,18 +10,29 @@ export interface IAddResult extends IBaseSuccess {
   data: IStaff
 }
 
-// 列表项接口
-export interface IStaff extends IBaseStaff {
+// data中列表项接口
+export interface IStaff extends IAddStaff {
   staffid: string
-}
-
-// 添加员工接口
-export interface IBaseStaff {
   sectionid: string
   name: string
   age: number
   gender: STAFF_GENDER
+  job: string
   salary: number
+  base: number
+  eatandlive: number
+  extra: number
+  fullmonth: number
+  overtime: number
+  transportation: number
+}
+
+// 添加员工接口
+export interface IAddStaff {
+  sectionid: string
+  name: string
+  age: number
+  gender: STAFF_GENDER
   job: string
 }
 
@@ -30,6 +40,18 @@ export interface IBaseStaff {
 export interface IDeleteStaff {
   sectionid: string
   staffid: string
+}
+
+// 工资编辑接口
+export interface IEditSalary {
+  name: string
+  job: string
+  base: number
+  eatandlive: number
+  extra: number
+  fullmonth: number
+  overtime: number
+  transportation: number
 }
 
 // 性别枚举

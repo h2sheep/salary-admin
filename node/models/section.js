@@ -21,7 +21,7 @@ const deleteOne = (sectionid) => {
 }
 
 // 改变部门信息值
-const incSectionInfo = (sectionid = 'st1616673137540', condition) => {
+const incSectionInfo = (sectionid, condition) => {
   return SectionModel.updateOne({ sectionid }, {
     '$inc': condition
   })

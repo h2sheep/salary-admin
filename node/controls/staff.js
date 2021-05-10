@@ -6,7 +6,7 @@ const { success } = require("../utils")
 
 // 添加员工
 const addStaff = async (req, res) => {
-  const { sectionid, name, age, gender, salary, job } = req.body
+  const { sectionid, name, age, gender, job } = req.body
   const nowTime = new Date().getTime()
 
   try {
@@ -16,8 +16,15 @@ const addStaff = async (req, res) => {
       name,
       age: age * 1,
       gender: gender * 1,
-      salary: salary * 1,
-      job
+      job,
+      salary: 0,
+      base: 0,
+      extra: 0,
+      overtime: 0,
+      fullmonth: 0,
+      eatandlive: 0,
+      transportation: 0,
+      holiday: 0
     }
     await addOne(staff)
     await incSectionInfo(sectionid, {
@@ -64,37 +71,46 @@ const deleteStaff = async (req, res) => {
 }
 
 
-// 更改信息
+// 更改员工基本信息
 const updateStaff = async (req, res) => {
-  const { staffid, sectionid, name, age, gender, salary, job } = req.body
+  const staff = req.body
 
   try {
-    // 先找到当前员工
-    const staff = await findOne(staffid)
 
-    console.log('当前员工', staff)
+    // 原来的员工信息
+    const preStaff = await findOne(staff.staffid)
 
-    // 如果改变了薪水就要更改部门支出
-    if (staff.salary !== salary * 1) {
-      await incSectionInfo(sectionid, {
-        expenditure: salary * 1 - staff.salary
+    const sum = staff.base * 1 + staff.extra * 1 + staff.overtime * 1 + staff.fullmonth * 1 + staff.eatandlive * 1 + staff.transportation * 1
+    
+    // 更新员工信息
+    const newStaff = await updateOne(staff.staffid, { 
+      sectionid: staff.sectionid,
+      age: staff.age * 1,
+      gender: staff.gender * 1,
+      job: staff.job,
+      base: staff.base * 1,
+      extra: staff.extra * 1,
+      overtime: staff.overtime * 1,
+      fullmonth: staff.fullmonth * 1,
+      eatandlive: staff.eatandlive * 1,
+      transportation: staff.transportation * 1,
+      salary: sum,
+    })
+    
+    if (preStaff.salary !== sum) {
+      await incSectionInfo(staff.sectionid, {
+        expenditure: sum - preStaff.salary
       })
     }
+    
+    console.log('当前员工', newStaff)
 
-    // 更新员工信息
-    await updateOne(staffid, { 
-      sectionid, 
-      name, 
-      age: age * 1, 
-      gender: gender * 1, 
-      salary: salary * 1, 
-      job 
-    })
     res.send(success(OK))
   } catch (e) {
     console.log(e)
   }
 }
+
 
 exports.addStaff = addStaff
 exports.getStaff = getStaff

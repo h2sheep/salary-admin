@@ -9,8 +9,11 @@ const history = require('connect-history-api-fallback')
 // 跨域
 const cors = require('cors')
 
-const usersRouter = require('./routes/users');
+// 管理员路由
+const usersRouter = require('./routes/users')
+// 部门路由
 const sectionsRouter = require('./routes/sections')
+// 员工路由
 const staffRouter = require('./routes/staff')
 
 var app = express();

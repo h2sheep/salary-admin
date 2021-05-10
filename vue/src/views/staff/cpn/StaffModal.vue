@@ -27,7 +27,7 @@
 
       <div class="modal-label" v-if="mode === 'add'">
         <span>部门: </span>
-        <a-select v-model:value="info.sectionid">
+        <a-select v-model:value="info.sectionid" placeholder="选择部门" style="width: 120px">
           <template v-for="section in sectionList" :key="section.sectionid">
             <a-select-option :value="section.sectionid">{{ section.name }}</a-select-option>
           </template>
@@ -39,10 +39,6 @@
         <a-input v-model:value="info.job" size="large" class="modal-input" />
       </div>
 
-      <div class="modal-label">
-        <span>工资: </span>
-        <a-input v-model:value="info.salary" type="number" size="large" class="modal-input" />
-      </div>
 
     </a-modal>
   </div>
@@ -51,15 +47,10 @@
 <script lang="ts">
 
   import store from '@/store'
-import { IBaseStaff, IStaff, STAFF_GENDER } from '@/typings/staff'
+  import { IAddStaff, IStaff, STAFF_GENDER } from '@/typings/staff'
   import { defineComponent, reactive, getCurrentInstance, ComponentInternalInstance, onMounted, toRefs, computed } from 'vue'
 
-  import SectionSelect from './SectionSelect.vue'
-
   export default defineComponent({
-    components: {
-      SectionSelect
-    },
     emits: ['add', 'update'],
     setup(props, { emit }) {
 
@@ -70,52 +61,45 @@ import { IBaseStaff, IStaff, STAFF_GENDER } from '@/typings/staff'
         show: false,
         mode: 'edit'
       })
+      let curStaff: IStaff | {} = {}
 
+      // 性别
       const GENDER = {
         MALE: STAFF_GENDER.MALE,
         FEMALE: STAFF_GENDER.FEMALE
       }
 
       // 表单
-      const info = reactive({
-        staffid: '',
+      const info = reactive<IAddStaff>({
         sectionid: '',
         name: '',
         age: 18,
         gender: GENDER.MALE,
-        job: '',
-        salary: 0
+        job: ''
       })  
 
-      // 取消空格
-      const onTextchange = () => {
-        info.name = info.name.trim()
-        info.job = info.job.trim()
-      }
-      // 获取部门id
-      const onSectionChange = (sectionid: string) => info.sectionid = sectionid
 
       onMounted(() => {
         // 监听编辑事件
         proxy?.$bus.on<IStaff>('editStaff', (staff) => {
+          curStaff = staff!
           _setInfo(staff)
           state.mode = 'edit'
         })
         // 监听添加事件
         proxy?.$bus.on<IStaff>('addStaff', () => {
+          curStaff = {}
           _setInfo()
           state.mode = 'add'
         })
       })
 
       function _setInfo(staff?: IStaff) {
-        info.staffid = staff?.staffid || ''
         info.sectionid = staff?.sectionid || ''
         info.name = staff?.name || ''
         info.age = staff?.age || 18
         info.gender = staff?.gender || GENDER.MALE
         info.job = staff?.job || ''
-        info.salary = staff?.salary || 0
         state.show = true
       }
 
@@ -125,33 +109,24 @@ import { IBaseStaff, IStaff, STAFF_GENDER } from '@/typings/staff'
         if (!info.job) return proxy?.$message.warn('请填写职位')
 
         // 修改
-        if (info.staffid) {
-          const staff: IStaff = {
-            staffid: info.staffid,
-            sectionid: info.sectionid,
-            name: info.name,
-            age: info.age * 1,
-            gender: info.gender,
-            job: info.job,
-            salary: info.salary * 1
-          }
-
-          emit('update', staff)
-        } else {
-          const staff: IBaseStaff = {
-            sectionid: info.sectionid,
-            name: info.name,
-            age: info.age * 1,
-            gender: info.gender,
-            job: info.job,
-            salary: info.salary * 1
-          }
-          
-          emit('add', staff)
+        if (curStaff.hasOwnProperty('staffid')) {
+          curStaff = {...curStaff, ...info}
+          emit('update', curStaff)
+        } 
+        
+        // 添加
+        else {
+          emit('add', info)
         }
 
         // 关闭弹窗
         state.show = false  
+      }
+
+      // 取消空格
+      const onTextchange = () => {
+        info.name = info.name.trim()
+        info.job = info.job.trim()
       }
 
       return {
@@ -161,7 +136,6 @@ import { IBaseStaff, IStaff, STAFF_GENDER } from '@/typings/staff'
         info,
         handleOk,
         onTextchange,
-        onSectionChange
       }
     }
   })

@@ -1,4 +1,4 @@
-import { IBaseStaff, IStaff } from "@/typings/staff"
+import { IAddStaff, IStaff } from "@/typings/staff"
 
 import { useStore } from 'vuex'
 import { IGlobalState } from '@/store'
@@ -7,7 +7,7 @@ import Types from '@/store/modules/staff/actionTypes'
 
 export interface IUseStaff {
   setStaffList: (sectonid?: string) => void
-  addStaffItem: (staff: IBaseStaff) => void
+  addStaffItem: (staff: IAddStaff) => void
   deleteStaffItem: (sectionid: string, staffid: string) => void
   updateStaffItem: (staff: IStaff) => void
 }
@@ -22,7 +22,7 @@ export function useStaff(): IUseStaff {
   }
    
   // 添加员工
-  const addStaffItem = (staff: IBaseStaff): void => {
+  const addStaffItem = (staff: IAddStaff): void => {
     store.dispatch(`staff/${Types.ADD_STAFF_ITEM}`, staff)
   }
 

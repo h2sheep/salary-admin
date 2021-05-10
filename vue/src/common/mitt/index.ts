@@ -1,7 +1,6 @@
 
 import { App } from "vue"
 
-
 import mitt, { Emitter } from "mitt"
 
 // 对vue进行类型补充说明
