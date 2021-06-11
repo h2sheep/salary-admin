@@ -1,7 +1,5 @@
 # 记录
 
-> 敲代码时发现思路有些不明确了  记录一下
-
 ## express
 
 ### 设计数据集合
@@ -116,3 +114,43 @@
 ##### 柱状图
 
 * 查找所有部门信息 只获取name expenditure
+
+
+
+-----
+
+
+
+### 接口
+
+#### users
+
+| 接口          | 参数                                                       | 功能     | 方式  |
+| ------------- | ---------------------------------------------------------- | -------- | ----- |
+| /users/signin | nickname: string<br/>username: string<br/>password: string | 注册     | POST  |
+| /users/login  | username: string<br/>password: string                      | 登录     | POST  |
+| /users/info   | uid: string                                                | 用户信息 | GET   |
+| /users/reset  | uid: string<br/>password: string                           | 修改密码 | PATCH |
+
+#### sections
+
+| 接口             | 参数                               | 功能     | 方式   |
+| ---------------- | ---------------------------------- | -------- | ------ |
+| /sections/get    | null                               | 获取部门 | GET    |
+| /sections/add    | name: string                       | 添加部门 | POST   |
+| /sections/update | sectionid: string<br/>name: string | 修改部门 | PATCH  |
+| /sections/delete | sectionid: string                  | 删除部门 | DELETE |
+
+#### staff
+
+| 接口          | 参数                                                         | 功能     | 方式   |
+| ------------- | ------------------------------------------------------------ | -------- | ------ |
+| /staff/get    | sectionid?: string                                           | 获取员工 | GET    |
+| /staff/add    | sectionid: string<br/>name: string<br/>age: number<br/>gender: STAFF_GENDER<br/>job: string | 添加员工 | POST   |
+| /staff/delete | sectionid: string<br/>staffid: string                        | 删除员工 | DELETE |
+| /staff/update | staffid: string<br/>sectionid: string<br/>name: string<br/>age: number<br/>gender: STAFF_GENDER<br/>job: string<br/>salary: number<br/>base: number<br/>eatandlive: number<br/>extra: number<br/>fullmonth: number<br/>overtime: number<br/>transportation: number | 修改员工 | POST   |
+
+```rxt
+
+```
+
