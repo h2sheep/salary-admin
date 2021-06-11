@@ -55,7 +55,7 @@
           if (result.code === 0) {
             proxy?.$message.success('登录成功')
             setLocalstorage('salary-admin-uid', result.data.uid)
-            router.replace('/')
+            // router.replace('/')
           } else {
             proxy?.$message.error(result.data)
           }
