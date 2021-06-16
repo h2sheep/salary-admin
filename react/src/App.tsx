@@ -1,18 +1,26 @@
-import { useContext } from 'react'
-import './App.css'
-import { AppContext } from './store'
+import { lazy, Suspense, useContext } from 'react'
+import Loading from 'components/Loading'
+import { AppContext } from 'store'
+import './App.less'
+
+const UnAuthApp = lazy(() => import('unAuth-app'))
+const HomePage = lazy(() => import('views/home'))
+
+
 
 function App() {
 
-  const store = useContext(AppContext)
+  const context = useContext(AppContext)
 
   return (
-    <div className="App">
-      { store?.name }
-      <h1>{ store?.count }</h1>
-      <button onClick={ () => store?.add(1) }>add</button>
+    <div className="app">
+      <Suspense fallback={<Loading />}>
+        {
+          context?.user.token ?  <HomePage /> : <UnAuthApp />
+        }
+      </Suspense>
     </div>
-  );
+  )
 }
 
 export default App;

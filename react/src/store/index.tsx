@@ -1,24 +1,16 @@
-import { FC, ReactNode } from "react";
-import { createContext, ReactElement } from "react";
-import useCount from "./count";
-import { IUseCount } from "./count/typing";
+import { FC, ReactNode } from "react"
+import { createContext, ReactElement } from "react"
 
-interface IStore extends IUseCount {
-  name: string
-}
+import useUser, { IUseUser } from "./user"
 
+interface IStore extends IUseUser {}
+// 创建全局Context
 export const AppContext = createContext<IStore | null>(null)
 
+// 创建Store
 const Store: FC<ReactNode> = ({ children }): ReactElement => {
-  const { count, add } = useCount()
-
-  const name = 'a'
-
-  return (
-   <AppContext.Provider value={{ name, count, add }}>
-     { children }
-   </AppContext.Provider>
-  )
+  return <AppContext.Provider value={{ ...useUser() }} children={children} />
 }
 
+// 暴露Store
 export default Store
